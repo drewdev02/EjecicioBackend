@@ -9,7 +9,7 @@
 
     <!-- Definir el appender de archivo -->
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <file>logs/bot.log</file>
+        <file>logs/app.log</file>
         <append>true</append>
         <prudent>true</prudent>
         <encoder>
@@ -17,8 +17,8 @@
         </encoder>
     </appender>
 
-    <!-- Configurar el logger de tu bot -->
-    <logger name="com.tubot" level="INFO">
+    <!-- Configurar el logger de la app -->
+    <logger name="com.demo" level="INFO">
         <appender-ref ref="file"/>
         <appender-ref ref="console"/>
     </logger>
