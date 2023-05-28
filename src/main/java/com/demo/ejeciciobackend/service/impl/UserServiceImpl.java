@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     public Optional<User> updateUser(Long id, User user) {
         return userRepository.findById(id)
                 .map(existingUser -> {
-                    User updatedUser = User.builder()
+                    var updatedUser = User.builder()
                             .id(existingUser.getId())
                             .name(user.getName())
                             .email(user.getEmail())

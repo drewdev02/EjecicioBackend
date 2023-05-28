@@ -2,6 +2,7 @@ package com.demo.ejeciciobackend.controllers;
 
 import com.demo.ejeciciobackend.models.User;
 import com.demo.ejeciciobackend.service.UserService;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,12 +13,10 @@ import java.util.Optional;
 @Slf4j
 @RestController
 @RequestMapping("/user")
+@AllArgsConstructor
 public class UserController {
-    private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private final UserService userService;
 
     @GetMapping("/")
     public ResponseEntity<Optional<List<User>>> getAllUsers() {
