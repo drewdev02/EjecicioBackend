@@ -2,6 +2,7 @@ package com.demo.ejeciciobackend.models;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "detalleVentas")
@@ -25,7 +27,7 @@ public class DetalleVenta {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idProducto", insertable = false, updatable = false)
-    private Producto producto;
+    private Product producto;
 }
 
 
