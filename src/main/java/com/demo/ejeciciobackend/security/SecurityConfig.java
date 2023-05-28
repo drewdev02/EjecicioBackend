@@ -1,6 +1,7 @@
 package com.demo.ejeciciobackend.security;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,8 +14,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@AllArgsConstructor
+@Slf4j
 @Configuration
+@AllArgsConstructor
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
     private final JWTAuthorizationFilter jwtAuthorizationFilter;
@@ -24,6 +26,7 @@ public class SecurityConfig {
         var jwtAuthenticationFilter = new JWTAuthenticationFilter();
         jwtAuthenticationFilter.setAuthenticationManager(authenticationManager);
         jwtAuthenticationFilter.setFilterProcessesUrl("/login");
+        log.info("Configuring security filter chain");
         return httpSecurity.csrf().disable()
                 .authorizeRequests()
                 .anyRequest()
@@ -41,6 +44,7 @@ public class SecurityConfig {
 
     @Bean
     AuthenticationManager authenticationManager(HttpSecurity httpSecurity) throws Exception {
+        log.info("Creating authentication manager");
         return httpSecurity.getSharedObject(AuthenticationManagerBuilder.class)
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(passwordEncoder())
@@ -52,10 +56,5 @@ public class SecurityConfig {
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    public static void main(String[] args) {
-        System.out.println(new BCryptPasswordEncoder().encode("admin"));
-    }
-
 
 }
